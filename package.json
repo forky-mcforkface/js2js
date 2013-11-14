@@ -1,11 +1,11 @@
 {
     "name": "js2js",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "Victor Haydin <victor.haydin@gmail.com>",
     "description": "Revolutionary open-source compiler from JavaScript to JavaScript",
     "homepage": "http://eleks.github.io/js2js/",
     "bin": {
-        "js2js": "./src/js2js.js"
+        "js2js": "./src/js2.js"
     },
     "repository": {
         "type": "git",
