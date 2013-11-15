@@ -26,7 +26,7 @@ optionParser.parse();
 var options = optionParser.getopt();
 
 if(!options.i || !options.o) {
-	console.log('Please specify input and output paramenters.')
+	console.log('Please specify input and output parameters.')
 	printHelp();
 	process.exit(1);
 }
