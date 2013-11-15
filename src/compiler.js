@@ -5,7 +5,7 @@ var fs = require('fs');
 var Js2JsCompiler = function(logger, verbose) {
 	this._logger = logger;
 	this._verbose = verbose;
-}
+};
 
 Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 	var input = fs.lstatSync(inputLocation);
@@ -21,7 +21,7 @@ Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 	else {
 		return err('Input and output location should be both files or directories.');
 	}
-}
+};
 
 Js2JsCompiler.prototype.compileDirectory = function(inputLocation, outputLocation) {
 	fs.mkdirSync(outputLocation);
@@ -40,11 +40,11 @@ Js2JsCompiler.prototype.compileDirectory = function(inputLocation, outputLocatio
 		}
 	}
 	return ok();
-}
+};
 
 Js2JsCompiler.prototype.compileCode = function(code) {
 	return code; // as we need to compile javascript to javascript, we do nothing here :)
-}
+};
 
 Js2JsCompiler.prototype.copyFile = function(inputFile, outputFile) {
 	this._logIfVerbose('Non JS file. Copying ' + inputFile + '...');
@@ -52,7 +52,7 @@ Js2JsCompiler.prototype.copyFile = function(inputFile, outputFile) {
 	fs.writeFileSync(outputFile, code);
 	this._logIfVerbose('Output is written to: ' + outputFile);
 	return ok();
-}
+};
 
 Js2JsCompiler.prototype.compileFile = function(inputFile, outputFile) {
 	if(!endsWith(inputFile, '.js')) {
@@ -65,25 +65,25 @@ Js2JsCompiler.prototype.compileFile = function(inputFile, outputFile) {
 	fs.writeFileSync(outputFile, compiled);
 	this._logIfVerbose('Output is written to: ' + outputFile);
 	return ok();
-}
+};
 
 Js2JsCompiler.prototype._logIfVerbose = function(message) {
 	if(this._logger && this._verbose) {
 		this._logger(message);
 	}
-}
+};
 
 function ok() {
 	return {
 		ok:true
-	}
+	};
 }
 
 function err(status) {
 	return {
 		ok: false,
 		status: status
-	}
+	};
 }
 
 function appendFileName(directory, file) {
