@@ -9,17 +9,19 @@ var Js2JsCompiler = function(logger, verbose, forceOverwrite) {
 };
 
 Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
-	var input = fs.lstatSync(inputLocation);
+	if (inputLocation === outputLocation) {
+		return err('Your code is already js2js-compiled. My work here is done.');
+	}
 	if (!this._forceOverwrite && fs.existsSync(outputLocation)) {
 		return err('Output location already exists. Please remove it before compilation (or use The --force).');
 	}
+
+	var input = fs.lstatSync(inputLocation);
 	if (input.isFile()) {
 		return this.compileFile(inputLocation, outputLocation);
-	}
-	else if (input.isDirectory()) {
+	} else if (input.isDirectory()) {
 		return this.compileDirectory(inputLocation, outputLocation);
-	}
-	else {
+	} else {
 		return err('Input and output location should be both files or directories.');
 	}
 };
