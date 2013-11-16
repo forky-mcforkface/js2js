@@ -30,7 +30,7 @@ optionParser.parse();
 
 var options = optionParser.getopt();
 
-if(!options.i || !options.o) {
+if (!options.i || !options.o) {
 	console.log('Please specify input and output parameters.');
 	printHelp();
 	process.exit(1);
@@ -40,10 +40,9 @@ var compiler = new Compiler.Js2JsCompiler(console.log, VERBOSE, FORCE);
 
 var result = compiler.compile(options.i, options.o);
 
-if(result.ok) {
+if (result.ok) {
 	console.log('Done!');
-}
-else {
+} else {
 	console.log('ERROR: ' + result.status);
 	process.exit(1);
 }

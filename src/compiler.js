@@ -10,13 +10,13 @@ var Js2JsCompiler = function(logger, verbose, forceOverwrite) {
 
 Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 	var input = fs.lstatSync(inputLocation);
-	if(!this._forceOverwrite && fs.existsSync(outputLocation)) {
+	if (!this._forceOverwrite && fs.existsSync(outputLocation)) {
 		return err('Output location already exists. Please remove it before compilation (or use The --force).');
 	}
-	if(input.isFile()) {
+	if (input.isFile()) {
 		return this.compileFile(inputLocation, outputLocation);
 	}
-	else if(input.isDirectory()) {
+	else if (input.isDirectory()) {
 		return this.compileDirectory(inputLocation, outputLocation);
 	}
 	else {
@@ -25,19 +25,24 @@ Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 };
 
 Js2JsCompiler.prototype.compileDirectory = function(inputLocation, outputLocation) {
-	if(!fs.existsSync(outputLocation)) {
+	if (!fs.existsSync(outputLocation)) {
 		fs.mkdirSync(outputLocation);
 	}
-	var files = fs.readdirSync(inputLocation);
+	
 	this._logIfVerbose("Scanning directory: " + inputLocation);
-	for(var file in files) {
-		var input = fs.lstatSync(appendFileName(inputLocation, files[file]));
-		if(input.isDirectory()) { // subdir
-			this.compileDirectory(appendFileName(inputLocation, files[file]), appendFileName(outputLocation, files[file]));
-		}
-		else {
-			var result = this.compileFile(appendFileName(inputLocation, files[file]), appendFileName(outputLocation, files[file]));
-			if(!result.ok) {
+	var files = fs.readdirSync(inputLocation);
+
+	for (var file in files) {
+		var inputFilePath = appendFileName(inputLocation, files[file]);
+		var outputFilePath = appendFileName(outputLocation, files[file]);
+
+		// File or subdirectory?
+		var input = fs.lstatSync(inputFilePath);
+		if (input.isDirectory()) {
+			this.compileDirectory(inputFilePath, outputFilePath);
+		} else {
+			var result = this.compileFile(inputFilePath, outputFilePath);
+			if (!result.ok) {
 				return result;
 			}
 		}
@@ -58,7 +63,7 @@ Js2JsCompiler.prototype.copyFile = function(inputFile, outputFile) {
 };
 
 Js2JsCompiler.prototype.compileFile = function(inputFile, outputFile) {
-	if(!endsWith(inputFile, '.js')) {
+	if (!endsWith(inputFile, '.js')) {
 		this.copyFile(inputFile, outputFile);
 		return ok();
 	}
@@ -71,7 +76,7 @@ Js2JsCompiler.prototype.compileFile = function(inputFile, outputFile) {
 };
 
 Js2JsCompiler.prototype._logIfVerbose = function(message) {
-	if(this._logger && this._verbose) {
+	if (this._logger && this._verbose) {
 		this._logger(message);
 	}
 };
@@ -94,7 +99,7 @@ function appendFileName(directory, file) {
 }
 
 function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	return str.indexOf(suffix, str.length - suffix.length) !== -1;
 }
 
 exports.Js2JsCompiler = Js2JsCompiler;
