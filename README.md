@@ -33,12 +33,13 @@ Done!
 
 ## Options
 
-* ```--force```: overwrite existing files in the destination location.
 * ```--decompile```: decompile js2js-powered JS back to original JS.
+* ```--force```: overwrite existing files in the destination location.
+* ```--verbose```: toggle detailed output.
 
 Technology
 ==========
-js2js is written in JavaScript and runs on Node.js.
+js2js is written in JavaScript and runs on Node.js. It is also available as an NPM package: [js2js](https://npmjs.org/package/js2js).
 
 How can I contribute?
 =====================
