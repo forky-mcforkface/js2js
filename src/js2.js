@@ -19,9 +19,9 @@ optionParser.addOption('h', 'help', 'Help')
 				printHelp();
 				process.exit(1);
 });
-optionParser.addOption('f', 'force', 'overwrite exitsing file')
-      .action(function() {
-        FORCE = true;
+optionParser.addOption('f', 'force', 'Overwrite existing output files')
+			.action(function() {
+				FORCE = true;
 });
 
 printGreeting();
@@ -36,9 +36,9 @@ if(!options.i || !options.o) {
 	process.exit(1);
 }
 
-var compiler = new Compiler.Js2JsCompiler(console.log, VERBOSE);
+var compiler = new Compiler.Js2JsCompiler(console.log, VERBOSE, FORCE);
 
-var result = compiler.compile(options.i, options.o, { force: FORCE });
+var result = compiler.compile(options.i, options.o);
 
 if(result.ok) {
 	console.log('Done!');
