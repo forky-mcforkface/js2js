@@ -13,6 +13,11 @@ Features
 
 Usage
 =====
+For first-time usage, fetch the dependencies:
+```
+$ cd js2js
+$ npm install
+```
 To compile your code, use the following command:
 ```
 node js2.js -i <input_file_or_directory> -o <output_file_or_directory>
@@ -25,6 +30,11 @@ Compiling js2.js...
 Output is written to: js2.compiled.js
 Done!
 ```
+
+## Options
+
+* ```--force```: overwrite existing files in the destination location.
+* ```--decompile```: decompile js2js-powered JS back to original JS.
 
 Technology
 ==========
