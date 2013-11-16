@@ -13,7 +13,7 @@ Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 		return err('Your code is already js2js-compiled. My work here is done.');
 	}
 	if (!this._forceOverwrite && fs.existsSync(outputLocation)) {
-		return err('Output location already exists. Please remove it before compilation (or use The --force).');
+		return err('Output location already exists. Please remove it before usage (or use The --force).');
 	}
 
 	var input = fs.lstatSync(inputLocation);
@@ -76,6 +76,11 @@ Js2JsCompiler.prototype.compileFile = function(inputFile, outputFile) {
 	this._logIfVerbose('Output is written to: ' + outputFile);
 	return ok();
 };
+
+Js2JsCompiler.prototype.decompile = function(inputLocation, outputLocation) {
+	// I had to read the whole Dragon Book again to implement this.
+	return this.compile(inputLocation, outputLocation);
+}
 
 Js2JsCompiler.prototype._logIfVerbose = function(message) {
 	if (this._logger && this._verbose) {

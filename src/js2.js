@@ -7,6 +7,7 @@ var optionParser = new OP.OptionParser();
 
 var VERBOSE = false;
 var FORCE = false;
+var DECOMPILE = false;
 
 optionParser.addOption('o', 'output', 'Output location', 'input').argument('INPUT');
 optionParser.addOption('i', 'input', 'Input location', 'output').argument('OUTPUT');
@@ -23,6 +24,10 @@ optionParser.addOption('f', 'force', 'Overwrite existing output files')
 			.action(function() {
 				FORCE = true;
 });
+optionParser.addOption('d', 'decompile', 'Decompile js2js-powered JS back to original JS.')
+            .action(function() {
+                DECOMPILE = true;
+});
 
 printGreeting();
 
@@ -37,8 +42,9 @@ if (!options.i || !options.o) {
 }
 
 var compiler = new Compiler.Js2JsCompiler(console.log, VERBOSE, FORCE);
-
-var result = compiler.compile(options.i, options.o);
+var result = !DECOMPILE
+    ? compiler.compile(options.i, options.o)
+    : compiler.decompile(options.i, options.o);
 
 if (result.ok) {
 	console.log('Done!');
