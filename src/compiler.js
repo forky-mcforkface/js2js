@@ -2,15 +2,16 @@
 
 var fs = require('fs');
 
-var Js2JsCompiler = function(logger, verbose) {
+var Js2JsCompiler = function(logger, verbose, forceOverwrite) {
 	this._logger = logger;
 	this._verbose = verbose;
+	this._forceOverwrite = forceOverwrite;
 };
 
-Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation, options) {
+Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation) {
 	var input = fs.lstatSync(inputLocation);
-	if(!options.force && fs.existsSync(outputLocation)) {
-		return err('Output location already exists. Please remove it before compilation.');
+	if(!this._forceOverwrite && fs.existsSync(outputLocation)) {
+		return err('Output location already exists. Please remove it before compilation (or use The --force).');
 	}
 	if(input.isFile()) {
 		return this.compileFile(inputLocation, outputLocation);
@@ -24,7 +25,9 @@ Js2JsCompiler.prototype.compile = function(inputLocation, outputLocation, option
 };
 
 Js2JsCompiler.prototype.compileDirectory = function(inputLocation, outputLocation) {
-	fs.mkdirSync(outputLocation);
+	if(!fs.existsSync(outputLocation)) {
+		fs.mkdirSync(outputLocation);
+	}
 	var files = fs.readdirSync(inputLocation);
 	this._logIfVerbose("Scanning directory: " + inputLocation);
 	for(var file in files) {
