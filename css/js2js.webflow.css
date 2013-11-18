@@ -441,16 +441,16 @@ p {
   margin-bottom: 10px;
 }
 .disclaimer {
-  color: #262525;
+  color: #FFFFFF;
 }
 .disclaimer a:visited {
-  color: #262525;
+  color: #FFFFFF;
 }
 .disclaimer a:hover {
-  color: #464545;
+  color: #0000FF;
 }
 .disclaimer a:link {
-  color: #262525;
+  color: #FFFFFF;
 }
 .d-footer {
   padding-top: 30px;
