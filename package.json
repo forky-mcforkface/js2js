@@ -1,28 +1,29 @@
 {
-    "name": "js2js",
-    "version": "1.0.3",
-    "author": "Victor Haydin <victor.haydin@gmail.com>",
-    "description": "Revolutionary open-source compiler from JavaScript to JavaScript",
-    "homepage": "http://eleks.github.io/js2js/",
-    "bin": {
-        "js2js": "./src/js2.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/eleks/js2js.git"
-    },
-    "keywords": [
-        "javascript",
-        "compiler",
-        "transform"
-    ],
-    "dependencies": {
-        "OptionParser": "~0.1.1"
-    },
-    "devDependencies": {},
-    "license": "MIT",
-    "engines": {
-        "node": ">=0.6",
-        "npm": "~1"
-    }
+  "name": "js2js",
+  "version": "1.0.3",
+  "author": "Victor Haydin <victor.haydin@gmail.com>",
+  "description": "Revolutionary open-source compiler from JavaScript to JavaScript",
+  "homepage": "http://eleks.github.io/js2js/",
+  "bin": {
+    "js2js": "./src/js2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eleks/js2js.git"
+  },
+  "keywords": [
+    "javascript",
+    "compiler",
+    "transform"
+  ],
+  "dependencies": {
+    "OptionParser": "~0.1.1",
+    "expect.js": "~0.2.0"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.6",
+    "npm": "~1"
+  }
 }
